@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kyushu Travel Journal 2026 九州</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Zen Kaku Gothic New & Plus Jakarta Sans for Korean Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            oatmeal: '#FBF9F5',
+            sand: '#F2ECE4',
+            milktea: '#E4D8C9',
+            sage: '#8F9B82',
+            'sage-dark': '#748068',
+            'sage-light': '#EEF2EC',
+            clay: '#D6C7B2',
+            charcoal: '#2D2824',
+            muted: '#8C847A',
+            cream: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Zen Kaku Gothic New"', 'sans-serif'],
+          },
+          boxShadow: {
+            'warm': '0 4px 20px -2px rgba(140, 132, 122, 0.08), 0 2px 6px -1px rgba(140, 132, 122, 0.04)',
+            'float': '0 12px 30px -4px rgba(100, 90, 80, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Hide scrollbar for clean UI */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      background-color: #F0ECE4;
+      font-feature-settings: "palt";
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="text-charcoal antialiased selection:bg-sage/20">
+
+  <!-- Mobile View Container -->
+  <div class="max-w-md mx-auto min-h-screen bg-oatmeal relative flex flex-col shadow-2xl border-x border-sand overflow-x-hidden">
+    
+    <!-- Top Header -->
+    <header class="sticky top-0 z-30 bg-oatmeal/90 backdrop-blur-md px-5 pt-7 pb-3 border-b border-sand/70 flex items-center justify-between transition-all">
+      <div>
+        <span class="text-[10px] tracking-[0.25em] uppercase text-sage-dark font-semibold">Kyushu Autumn Travel</span>
+        <h1 class="text-xl font-bold tracking-tight text-charcoal flex items-center gap-1.5">
+          2026 九州 <span class="text-xs px-2 py-0.5 rounded-full bg-sand text-muted font-normal">5 Days</span>
+        </h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="switchTab('tools')" title="快速工具" class="w-9 h-9 rounded-full bg-white/80 border border-sand shadow-sm flex items-center justify-center text-charcoal hover:bg-white active:scale-95 transition-transform">
+          <i class="ph ph-compass text-lg text-sage-dark"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 pb-28 px-4 pt-4 overflow-y-auto no-scrollbar">
+
+      <!-- ================= 頁籤 1: 行程 ITINERARY ================= -->
+      <section id="tab-itinerary" class="tab-pane block space-y-4">
+        
+        <!-- 日期切換膠囊 (Date Pill Tabs) -->
+        <div class="flex gap-2 p-1 bg-sand/60 rounded-2xl border border-sand overflow-x-auto no-scrollbar">
+          <button onclick="setDay('day1')" id="btn-day1" class="day-btn flex-1 min-w-[70px] py-2 px-1 text-center rounded-xl font-medium text-xs transition-all bg-white text-charcoal shadow-sm">
+            <span class="block text-[10px] text-muted">Fri</span>
+            11/6 福岡
+          </button>
+          <button onclick="setDay('day2')" id="btn-day2" class="day-btn flex-1 min-w-[70px] py-2 px-1 text-center rounded-xl font-medium text-xs transition-all text-muted hover:text-charcoal">
+            <span class="block text-[10px] text-muted">Sat</span>
+            11/7 太宰府&糸島
+          </button>
+          <button onclick="setDay('day3')" id="btn-day3" class="day-btn flex-1 min-w-[70px] py-2 px-1 text-center rounded-xl font-medium text-xs transition-all text-muted hover:text-charcoal">
+            <span class="block text-[10px] text-muted">Sun</span>
+            11/8 高千穗&阿蘇
+          </button>
+          <button onclick="setDay('day4')" id="btn-day4" class="day-btn flex-1 min-w-[70px] py-2 px-1 text-center rounded-xl font-medium text-xs transition-all text-muted hover:text-charcoal">
+            <span class="block text-[10px] text-muted">Mon</span>
+            11/9 天神
+          </button>
+          <button onclick="setDay('day5')" id="btn-day5" class="day-btn flex-1 min-w-[70px] py-2 px-1 text-center rounded-xl font-medium text-xs transition-all text-muted hover:text-charcoal">
+            <span class="block text-[10px] text-muted">Tue</span>
+            11/10 福岡
+          </button>
+        </div>
+
+        <!-- 交通與天氣提示 Banner -->
+        <div id="day-banner" class="p-3.5 bg-gradient-to-r from-sage-light to-sand/40 border border-sage/20 rounded-2xl text-xs flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-sage-dark shadow-sm">
+              <i id="banner-icon" class="ph ph-airplane-takeoff text-base"></i>
+            </div>
+            <div>
+              <div id="banner-title" class="font-semibold text-charcoal">啟程台北・抵達福岡</div>
+              <div id="banner-sub" class="text-muted text-[11px]">入住飯店、博多燒肉與中洲散步</div>
+            </div>
+          </div>
+          <a id="banner-map-link" href="https://www.google.com/maps" target="_blank" class="px-2.5 py-1.5 bg-white text-sage-dark rounded-xl border border-sand text-[11px] font-medium flex items-center gap-1 shadow-sm active:scale-95">
+            <i class="ph ph-map-pin"></i> 導航總覽
+          </a>
+        </div>
+
+        <!-- 行程時間軸清單 (動態渲染) -->
+        <div id="itinerary-list" class="space-y-3.5 pt-1">
+          <!-- JS 動態插入 -->
+        </div>
+
+        <!-- 新增臨時行程按鈕 -->
+        <button onclick="openEditModal(null)" class="w-full py-3 border border-dashed border-clay rounded-2xl text-muted text-xs font-medium hover:bg-white/60 active:scale-98 transition flex items-center justify-center gap-1.5">
+          <i class="ph ph-plus-circle text-base text-sage"></i> 自訂新增當日行程點
+        </button>
+      </section>
+
+      <!-- ================= 頁籤 2: 必買推薦 MUST BUY ================= -->
+      <section id="tab-mustbuy" class="tab-pane hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-charcoal">精選必買名物清單</h2>
+            <p class="text-[11px] text-muted">福岡・熊本・高千穗在地特產與伴手禮</p>
+          </div>
+          <span class="text-xs bg-sand/80 px-2.5 py-1 rounded-full text-muted font-medium">分區整理</span>
+        </div>
+
+        <!-- 分區標籤列 -->
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterMustBuy('all')" class="mustbuy-filter px-3 py-1.5 rounded-full text-xs font-medium bg-charcoal text-white whitespace-nowrap">全部</button>
+          <button onclick="filterMustBuy('博多/天神')" class="mustbuy-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-sand text-muted whitespace-nowrap">博多 / 天神</button>
+          <button onclick="filterMustBuy('太宰府/糸島')" class="mustbuy-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-sand text-muted whitespace-nowrap">太宰府 / 糸島</button>
+          <button onclick="filterMustBuy('熊本/阿蘇')" class="mustbuy-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-sand text-muted whitespace-nowrap">熊本 / 阿蘇</button>
+          <button onclick="filterMustBuy('高千穗')" class="mustbuy-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-sand text-muted whitespace-nowrap">高千穗</button>
+        </div>
+
+        <!-- 必買卡片網格 -->
+        <div id="mustbuy-container" class="grid grid-cols-1 gap-3">
+          <!-- JS 動態產生卡片 -->
+        </div>
+      </section>
+
+      <!-- ================= 頁籤 3: 購物清單 SHOPPING ================= -->
+      <section id="tab-shopping" class="tab-pane hidden space-y-4">
+        <!-- 統計與進度卡片 -->
+        <div class="p-4 bg-white rounded-3xl border border-sand shadow-warm space-y-3">
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="text-[10px] uppercase font-semibold text-sage-dark tracking-wider">Shopping List</span>
+              <h2 class="text-lg font-bold text-charcoal">代購與採買進度</h2>
+            </div>
+            <div id="shopping-stats" class="text-right">
+              <span class="text-xl font-bold text-sage-dark font-mono" id="stat-count">0 / 0</span>
+              <div class="text-[10px] text-muted">已採買品項</div>
+            </div>
+          </div>
+          <!-- 進度條 -->
+          <div class="w-full bg-sand rounded-full h-2 overflow-hidden">
+            <div id="shopping-progress" class="bg-sage h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- 新增購物項目表單 -->
+        <form id="add-item-form" onsubmit="handleAddItem(event)" class="p-4 bg-white/80 backdrop-blur-sm rounded-3xl border border-sand shadow-sm space-y-3">
+          <div class="text-xs font-bold text-charcoal flex items-center gap-1.5">
+            <i class="ph ph-plus-circle text-sage text-base"></i> 新增欲採購商品
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="shop-input-name" placeholder="商品名稱 (例: 糸島花鹽布丁)" required 
+              class="flex-1 bg-oatmeal px-3.5 py-2.5 rounded-xl border border-sand text-xs focus:outline-none focus:border-sage text-charcoal placeholder:text-muted/60">
+            <input type="number" id="shop-input-qty" min="1" value="1" placeholder="數量" 
+              class="w-16 bg-oatmeal px-2.5 py-2.5 rounded-xl border border-sand text-xs text-center focus:outline-none focus:border-sage text-charcoal">
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="shop-input-note" placeholder="備註 (例: 送同事 / 焦糖口味 / 免稅)" 
+              class="flex-1 bg-oatmeal px-3.5 py-2 rounded-xl border border-sand text-xs focus:outline-none focus:border-sage text-charcoal placeholder:text-muted/60">
+            <button type="submit" class="px-4 py-2 bg-sage hover:bg-sage-dark active:scale-95 text-white rounded-xl text-xs font-medium transition shadow-sm flex items-center gap-1">
+              <i class="ph ph-check"></i> 加入
+            </button>
+          </div>
+        </form>
+
+        <!-- 購物清單清單 -->
+        <div id="shopping-list" class="space-y-2.5">
+          <!-- JS 渲染 -->
+        </div>
+      </section>
+
+      <!-- ================= 頁籤 4: 實用工具箱 TOOLS ================= -->
+      <section id="tab-tools" class="tab-pane hidden space-y-4">
+        
+        <!-- 1. Google 翻譯直達與情境日語卡 -->
+        <div class="p-4 bg-white rounded-3xl border border-sand shadow-warm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
+                あA
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-charcoal">Google 翻譯 (手機直達)</h3>
+                <p class="text-[10px] text-muted">開啟即時對話語音與鏡頭翻譯</p>
+              </div>
+            </div>
+            <a href="https://translate.google.com/?sl=zh-TW&tl=ja&op=translate" target="_blank" 
+               class="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-xs font-medium flex items-center gap-1 shadow-sm active:scale-95 transition">
+              <i class="ph ph-arrow-square-out"></i> 開啟
+            </a>
+          </div>
+
+          <!-- 快速實用日本旅遊對話手卡 -->
+          <div class="pt-2 border-t border-sand/60">
+            <div class="text-[11px] font-semibold text-muted mb-2 flex items-center justify-between">
+              <span>✈️ 常見手指日文 (點擊可複製)：</span>
+              <span id="copy-toast" class="text-sage text-[10px] hidden font-bold">已複製！</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <button onclick="copyText('会計をお願いします (Kaikē o onegaishimasu)')" class="text-left p-2 rounded-xl bg-oatmeal border border-sand hover:bg-sand/40 active:scale-95 transition">
+                <div class="font-medium text-charcoal">請結帳</div>
+                <div class="text-[10px] text-muted">会計をお願いします</div>
+              </button>
+              <button onclick="copyText('これをお願いします (Kore o onegaishimasu)')" class="text-left p-2 rounded-xl bg-oatmeal border border-sand hover:bg-sand/40 active:scale-95 transition">
+                <div class="font-medium text-charcoal">我要這個</div>
+                <div class="text-[10px] text-muted">これをお願いします</div>
+              </button>
+              <button onclick="copyText('免税できますか？ (Menzei dekimasu ka?)')" class="text-left p-2 rounded-xl bg-oatmeal border border-sand hover:bg-sand/40 active:scale-95 transition">
+                <div class="font-medium text-charcoal">可以免稅嗎？</div>
+                <div class="text-[10px] text-muted">免税できますか？</div>
+              </button>
+              <button onclick="copyText('おすすめは何ですか？ (Osusume wa nan desu ka?)')" class="text-left p-2 rounded-xl bg-oatmeal border border-sand hover:bg-sand/40 active:scale-95 transition">
+                <div class="font-medium text-charcoal">推薦什麼呢？</div>
+                <div class="text-[10px] text-muted">おすすめは何ですか？</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 即時匯率計算器 -->
+        <div class="p-4 bg-white rounded-3xl border border-sand shadow-warm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-sm">
+                ¥
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-charcoal">日幣 / 台幣 匯率計算</h3>
+                <div class="text-[10px] text-muted flex items-center gap-1">
+                  匯率參考: 1 JPY ≈ 
+                  <input type="number" step="0.001" id="exchange-rate-input" value="0.21" onchange="convertCurrency('jpy')" 
+                    class="w-14 bg-sand/60 px-1 py-0.5 rounded text-charcoal text-center border-none font-mono">
+                  TWD
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <label class="block text-[10px] text-muted font-medium mb-1">日幣 (JPY ¥)</label>
+              <input type="number" id="calc-jpy" placeholder="0" oninput="convertCurrency('jpy')" 
+                class="w-full bg-transparent font-mono text-base font-bold text-charcoal focus:outline-none">
+            </div>
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <label class="block text-[10px] text-muted font-medium mb-1">折合台幣 (TWD NT$)</label>
+              <input type="number" id="calc-twd" placeholder="0" oninput="convertCurrency('twd')" 
+                class="w-full bg-transparent font-mono text-base font-bold text-sage-dark focus:outline-none">
+            </div>
+          </div>
+          <!-- 快捷金額試算標籤 -->
+          <div class="flex gap-1.5 flex-wrap">
+            <button onclick="quickJpy(1000)" class="px-2 py-1 bg-sand/60 hover:bg-sand text-[11px] rounded-lg text-charcoal font-mono">¥1,000</button>
+            <button onclick="quickJpy(3000)" class="px-2 py-1 bg-sand/60 hover:bg-sand text-[11px] rounded-lg text-charcoal font-mono">¥3,000</button>
+            <button onclick="quickJpy(5000)" class="px-2 py-1 bg-sand/60 hover:bg-sand text-[11px] rounded-lg text-charcoal font-mono">¥5,000</button>
+            <button onclick="quickJpy(10000)" class="px-2 py-1 bg-sand/60 hover:bg-sand text-[11px] rounded-lg text-charcoal font-mono">¥10,000</button>
+            <button onclick="quickJpy(5500)" class="px-2 py-1 bg-sand/60 hover:bg-sand text-[11px] rounded-lg text-charcoal font-mono" title="日本免稅門檻">¥5,500(免稅)</button>
+          </div>
+        </div>
+
+        <!-- 3. AA 制分帳小工具 -->
+        <div class="p-4 bg-white rounded-3xl border border-sand shadow-warm space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-sm">
+              <i class="ph ph-users-three"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-charcoal">用餐 / 租車 AA 制分帳</h3>
+              <p class="text-[10px] text-muted">無痛均攤，支援日幣與台幣切換</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] text-muted mb-1">消費總金額 (¥)</label>
+              <input type="number" id="split-total" placeholder="例如: 12800" oninput="calculateSplit()" 
+                class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand text-xs font-mono font-bold text-charcoal focus:outline-none focus:border-sage">
+            </div>
+            <div>
+              <label class="block text-[10px] text-muted mb-1">分攤人數 (人)</label>
+              <input type="number" id="split-people" value="2" min="1" oninput="calculateSplit()" 
+                class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand text-xs font-mono font-bold text-charcoal focus:outline-none focus:border-sage">
+            </div>
+          </div>
+
+          <div class="p-3 bg-sage-light rounded-2xl flex items-center justify-between border border-sage/20">
+            <div>
+              <span class="text-[11px] text-muted">每人應付 (無條件進位)</span>
+              <div class="text-base font-bold text-charcoal font-mono">
+                ¥ <span id="split-result-jpy">0</span> 
+                <span class="text-xs text-muted font-normal">/ 約 NT$ <span id="split-result-twd">0</span></span>
+              </div>
+            </div>
+            <button onclick="copySplitResult()" class="px-2.5 py-1.5 bg-white text-sage-dark rounded-xl border border-sand text-xs font-medium active:scale-95 transition">
+              複製結果
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. 天氣 Widget & 穿搭小卡 -->
+        <div class="p-4 bg-white rounded-3xl border border-sand shadow-warm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-sm">
+                <i class="ph ph-sun-horizon"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-charcoal">九州 11 月氣候與穿搭</h3>
+                <p class="text-[10px] text-muted">早晚溫差大・山區與海邊體感偏涼</p>
+              </div>
+            </div>
+            <span class="text-[10px] bg-sand px-2 py-0.5 rounded-full text-muted">秋季備忘</span>
+          </div>
+
+          <!-- 城市天氣卡片清單 -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <div class="flex justify-between items-center text-muted text-[11px] mb-1">
+                <span>福岡 / 天神</span>
+                <i class="ph ph-cloud-sun text-amber-500"></i>
+              </div>
+              <div class="text-sm font-bold text-charcoal">13°C ~ 21°C</div>
+              <div class="text-[10px] text-muted">微風舒適・洋蔥式穿搭</div>
+            </div>
+
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <div class="flex justify-between items-center text-muted text-[11px] mb-1">
+                <span>糸島海岸</span>
+                <i class="ph ph-wind text-teal-600"></i>
+              </div>
+              <div class="text-sm font-bold text-charcoal">12°C ~ 19°C</div>
+              <div class="text-[10px] text-muted">海風偏大・需防風外套</div>
+            </div>
+
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <div class="flex justify-between items-center text-muted text-[11px] mb-1">
+                <span>高千穗峽谷</span>
+                <i class="ph ph-tree text-sage-dark"></i>
+              </div>
+              <div class="text-sm font-bold text-charcoal">8°C ~ 17°C</div>
+              <div class="text-[10px] text-muted">峽谷陰涼・建議薄羽絨/毛衣</div>
+            </div>
+
+            <div class="p-2.5 bg-oatmeal rounded-2xl border border-sand">
+              <div class="flex justify-between items-center text-muted text-[11px] mb-1">
+                <span>阿蘇草千里</span>
+                <i class="ph ph-thermometer-cold text-blue-500"></i>
+              </div>
+              <div class="text-sm font-bold text-charcoal">6°C ~ 15°C</div>
+              <div class="text-[10px] text-muted">高山風大・備圍巾與帽子</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ================= 編輯 / 新增行程彈跳視窗 (Modal) ================= -->
+    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm hidden items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-5 w-full max-w-sm border border-sand shadow-float space-y-3.5 transform transition-all">
+        <div class="flex justify-between items-center pb-2 border-b border-sand">
+          <h3 id="modal-heading" class="text-sm font-bold text-charcoal">編輯行程項目</h3>
+          <button onclick="closeEditModal()" class="w-7 h-7 rounded-full bg-sand flex items-center justify-center text-muted hover:text-charcoal">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+
+        <input type="hidden" id="edit-item-id">
+        <input type="hidden" id="edit-item-day">
+
+        <div class="space-y-2.5 text-xs">
+          <div>
+            <label class="block text-muted text-[10px] mb-1 font-medium">時間 / 時段</label>
+            <input type="text" id="modal-time" placeholder="例如: 10:30 或 12:00-13:30" 
+              class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand focus:outline-none focus:border-sage text-charcoal">
+          </div>
+          <div>
+            <label class="block text-muted text-[10px] mb-1 font-medium">地點 / 項目名稱</label>
+            <input type="text" id="modal-title" placeholder="例如: Menya ISHII" 
+              class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand focus:outline-none focus:border-sage text-charcoal font-semibold">
+          </div>
+          <div>
+            <label class="block text-muted text-[10px] mb-1 font-medium">分類標籤</label>
+            <select id="modal-type" class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand focus:outline-none focus:border-sage text-charcoal">
+              <option value="sight">景點散策 (Sight)</option>
+              <option value="food">特色美食 (Food)</option>
+              <option value="cafe">咖啡甜點 (Cafe)</option>
+              <option value="traffic">交通租車 (Traffic)</option>
+              <option value="hotel">住宿 (Hotel)</option>
+              <option value="shop">購物採買 (Shop)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-muted text-[10px] mb-1 font-medium">地址 / 預約資訊 / 備註</label>
+            <textarea id="modal-desc" rows="2" placeholder="詳細說明、預約編號、推薦必點等" 
+              class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand focus:outline-none focus:border-sage text-charcoal"></textarea>
+          </div>
+          <div>
+            <label class="block text-muted text-[10px] mb-1 font-medium">Google Maps 網址 (可留空)</label>
+            <input type="url" id="modal-map" placeholder="https://maps.app.goo.gl/..." 
+              class="w-full bg-oatmeal px-3 py-2 rounded-xl border border-sand focus:outline-none focus:border-sage text-charcoal font-mono text-[11px]">
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button type="button" id="btn-delete-item" onclick="deleteCurrentItem()" class="px-3 py-2 bg-rose-50 text-rose-600 rounded-xl text-xs font-medium hover:bg-rose-100 hidden">
+            刪除
+          </button>
+          <button type="button" onclick="closeEditModal()" class="flex-1 py-2 bg-sand text-charcoal rounded-xl text-xs font-medium">
+            取消
+          </button>
+          <button type="button" onclick="saveItemChanges()" class="flex-1 py-2 bg-sage hover:bg-sage-dark text-white rounded-xl text-xs font-medium shadow-sm">
+            儲存修改
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 底部導覽列 (Bottom Navigation) ================= -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-sand px-6 py-2.5 flex justify-between items-center z-40 rounded-t-3xl shadow-float">
+      
+      <button onclick="switchTab('itinerary')" id="nav-itinerary" class="nav-item flex flex-col items-center gap-1 text-sage-dark transition-all">
+        <i class="ph-fill ph-map-trifold text-xl"></i>
+        <span class="text-[11px] font-semibold tracking-wider">行程</span>
+      </button>
+
+      <button onclick="switchTab('mustbuy')" id="nav-mustbuy" class="nav-item flex flex-col items-center gap-1 text-muted hover:text-charcoal transition-all">
+        <i class="ph ph-sparkle text-xl"></i>
+        <span class="text-[11px] font-medium tracking-wider">必買</span>
+      </button>
+
+      <button onclick="switchTab('shopping')" id="nav-shopping" class="nav-item flex flex-col items-center gap-1 text-muted hover:text-charcoal transition-all relative">
+        <i class="ph ph-bag-simple text-xl"></i>
+        <span class="text-[11px] font-medium tracking-wider">清單</span>
+        <span id="badge-shopping" class="absolute -top-1 right-1 w-2 h-2 rounded-full bg-rose-400 hidden"></span>
+      </button>
+
+      <button onclick="switchTab('tools')" id="nav-tools" class="nav-item flex flex-col items-center gap-1 text-muted hover:text-charcoal transition-all">
+        <i class="ph ph-wrench text-xl"></i>
+        <span class="text-[11px] font-medium tracking-wider">工具</span>
+      </button>
+
+    </nav>
+
+  </div>
+
+  <!-- JavaScript 核心程式碼 -->
+  <script>
+    /* ========================================================
+       1. 行程完整資料庫 (對應使用者所提供圖片之全部 4 天內容)
+       ======================================================== */
+    const DEFAULT_ITINERARY = {
+      day1: [
+        {
+          id: '1-1',
+          time: '13:40 - 16:55',
+          title: '[飛機] 長榮航空 BR104',
+          type: 'traffic',
+          desc: '13:40 TPE 桃園機場 T2 ✈️ 16:55 FUK 福岡機場\n報到櫃台: 19 (報到截止時間: 12:40)\n抵達福岡機場後，搭乘地鐵至博多車站前往飯店辦理入住手續。',
+          map: 'https://maps.google.com/?q=Fukuoka+Airport'
+        },
+        {
+          id: '1-2',
+          time: '18:00',
+          title: '[住宿] Prince Smart Inn Hakata',
+          type: 'hotel',
+          desc: '預訂編號：S20261106-1509056。近博多車站，智慧自助Check-in。',
+          map: 'https://maps.app.goo.gl/CMCTDtQHZajpYTpw5'
+        },
+        {
+          id: '1-3',
+          time: '19:30',
+          title: '[燒肉] 肉屋 肉一 博多店',
+          type: 'food',
+          desc: '訂位 11/6 19:30。高CP值人氣炭火燒肉，極品牛舌與厚切牛小排必點。',
+          map: 'https://maps.app.goo.gl/vTCcXBPuVL4CpfkB6'
+        },
+        {
+          id: '1-4',
+          time: '21:00',
+          title: '[博多] 博多運河城 (Canal City Hakata)',
+          type: 'shop',
+          desc: '大型複合購物中心、運河造景、燈光與水舞噴泉表演。商店多在 21:00 關門，適合戶外水池散步欣賞夜景。',
+          map: 'https://maps.app.goo.gl/16YTo164cEGnBe8PA'
+        },
+        {
+          id: '1-5',
+          time: '22:00',
+          title: '[博多] 中洲河畔・屋台街',
+          type: 'sight',
+          desc: '福岡最具夜晚特色的一站！那珂川河面倒映霓虹燈，感受博多路邊屋台文化，沿河漫步拍照氛圍極佳。',
+          map: 'https://maps.app.goo.gl/MZBRc3h2znPHcSGM9'
+        },
+        {
+          id: '1-6',
+          time: '22:45',
+          title: '[福岡 中洲] 福博相逢橋 聖誕燈飾',
+          type: 'sight',
+          desc: '中洲河畔散步時順路欣賞河橋浪漫冬季燈飾。',
+          map: 'https://maps.google.com/?q=福博であい橋'
+        }
+      ],
+      day2: [
+        {
+          id: '2-1',
+          time: '08:00 - 10:00',
+          title: '[福岡 博多] Menya ISHII',
+          type: 'food',
+          desc: '營業 08:00–16:00，預約 10:00，確認號碼：54M9H3。特色烏龍麵：明太釜玉奶油烏龍與雞天烏龍。預約連結: https://www.tablecheck.com/zh-TW/reservations/54M9H3',
+          map: 'https://maps.app.goo.gl/NuVHRegTXEJRA6An6'
+        },
+        {
+          id: '2-2',
+          time: '10:30',
+          title: '[交通] Times 取車',
+          type: 'traffic',
+          desc: '辦理租車出發手續，開啟太宰府及糸島半島自駕行程。',
+          map: 'https://maps.app.goo.gl/AGvVPZZzN1QJ3jv39'
+        },
+        {
+          id: '2-3',
+          time: '10:45',
+          title: '[福岡 博多] Fuk Coffee',
+          type: 'cafe',
+          desc: '08:00–20:00，福岡人氣特色咖啡廳，招牌大人味手工布丁必點！',
+          map: 'https://maps.app.goo.gl/LiDjPpVrmo8f4xu17'
+        },
+        {
+          id: '2-4',
+          time: '11:15',
+          title: '[福岡 博多] The Full Full Hakata',
+          type: 'food',
+          desc: '10:00–19:00 (二休息)，預約 11:30，預約號 RES12086。招牌明太子法國麵包，熱騰騰外脆內軟。',
+          map: 'https://maps.app.goo.gl/uPsc2jP7Mk5eVkhF7'
+        },
+        {
+          id: '2-5',
+          time: '12:00 - 13:30',
+          title: '[福岡 太宰府] 太宰府天滿宮',
+          type: 'sight',
+          desc: '約 1.5 hrs。參拜學問之神、欣賞太鼓橋、撫摸御神牛與梅花林。',
+          map: 'https://maps.app.goo.gl/tzpcRN34fH4AK8xL8'
+        },
+        {
+          id: '2-6',
+          time: '13:30 - 14:30',
+          title: '[福岡 太宰府] 太宰府前表參道散策',
+          type: 'food',
+          desc: '1. Kasanoya (かさの家) 烤梅枝餅現烤微酥 (https://maps.app.goo.gl/VFXcztqP7wEU7tE6)\n2. Sabo Kikuchi 梅枝餅搭茶飲\n3. 星巴克天滿宮表參道店：隈研吾木構格柵設計建築拍景。',
+          map: 'https://maps.app.goo.gl/5SSXLGSK8f8FP318A'
+        },
+        {
+          id: '2-7',
+          time: '14:30',
+          title: '[福岡 太宰府] 寶滿宮 竈門神社',
+          type: 'sight',
+          desc: '停留約 1 hr。結緣神社，御守設計極為精緻仙氣，四周綠林環繞。',
+          map: 'https://maps.app.goo.gl/Qr3XfPyTyNyEd4tu5'
+        },
+        {
+          id: '2-8',
+          time: '15:30',
+          title: '[福岡 糸島] Mataichi Salt Maker - Tottan Workshop',
+          type: 'food',
+          desc: '海邊製鹽工房「またいちの塩」，招牌鹽布丁甘甜醇美，亦可採買純淨海鹽。',
+          map: 'https://maps.app.goo.gl/f1ZwvQPnQ5K4TGZdA'
+        },
+        {
+          id: '2-9',
+          time: '16:15',
+          title: '[福岡 糸島] 櫻井神社 & 二見ヶ浦 夫婦岩',
+          type: 'sight',
+          desc: '古老社殿櫻井神社，順遊海景咖啡 Beach Cafe SUNSET 與二見ヶ浦海岸白色鳥居、夫婦岩日落。',
+          map: 'https://maps.app.goo.gl/ZfPU5eAB79ingvFC6'
+        },
+        {
+          id: '2-10',
+          time: '17:00',
+          title: '[福岡] OCEAN HOUSE (今宿海岸)',
+          type: 'food',
+          desc: '預約 17:00，預約ID：HF9FHN。今宿海岸旁人氣海景餐廳，坐擁180度夕陽海岸露台，主打炭烤牛排與牡蠣料理。',
+          map: 'https://maps.app.goo.gl/AGzUXfxEaaDQyJ2x6'
+        },
+        {
+          id: '2-11',
+          time: '20:30',
+          title: '[熊本] 熊本城 夜景散步',
+          type: 'sight',
+          desc: '外圍夜景點燈漫步，遠眺天守閣夜色（23:00 前全照明，之後轉為柔和照明）。',
+          map: 'https://maps.app.goo.gl/7t8pMcXtfi1jexon7'
+        },
+        {
+          id: '2-12',
+          time: '21:30',
+          title: '[住宿] [熊本] CANDEO HOTELS 熊本新市街',
+          type: 'hotel',
+          desc: '訂單編號：NXJ794141。頂樓設有高質感露天天空風呂 SPA，舒適好眠。',
+          map: 'https://maps.app.goo.gl/GyA7SNkqhckYujU5A'
+        }
+      ],
+      day3: [
+        {
+          id: '3-1',
+          time: '07:30',
+          title: '[熊本] Gluck Coffee Spot',
+          type: 'cafe',
+          desc: '營業時間 07:00–19:00。起司吐司、紅豆奶油吐司 (あんバタートースト) 與特色手沖單品。',
+          map: 'https://maps.app.goo.gl/XbigqwjDLnKeA9oT9'
+        },
+        {
+          id: '3-2',
+          time: '09:00',
+          title: '[出發] 啟程前往高千穗',
+          type: 'traffic',
+          desc: '車程約 90-120 min。路上品嚐いきなり団子（地瓜紅豆傳統糰子點心）。',
+          map: 'https://maps.app.goo.gl/Q2EhnuFRRvxUsz6z5'
+        },
+        {
+          id: '3-3',
+          time: '11:30 - 13:30',
+          title: '[高千穗] 出發高千穗峽 & 划船報到',
+          type: 'sight',
+          desc: '停車散步報到。12:30 划船整理番號 00010 (ATBIWVIM)。峽谷鬼斧神工，欣賞真名井瀑布。周邊順嚐「大舞神」南蠻炸雞點心。',
+          map: 'https://maps.app.goo.gl/d1xPZVYsLzDxQWUn6'
+        },
+        {
+          id: '3-4',
+          time: '13:30',
+          title: '[高千穗] 高千穗神社 & 在地甜點',
+          type: 'sight',
+          desc: '1. 高千穗神社參拜\n2. 菓子工房 Sorairo：起司饅頭 (チーズまんじゅう) 及高千穗釜炒茶口味\n3. 杜照 十社さん：特色釜炒茶香霜淇淋。',
+          map: 'https://maps.app.goo.gl/A3mvgX5asMfZFYc38'
+        },
+        {
+          id: '3-5',
+          time: '14:45 - 16:00',
+          title: '[阿蘇] 前往草千里 (車程約 60 min)',
+          type: 'traffic',
+          desc: '1. 山康：阿蘇赤牛丼名店\n2. 阿蘇名物高菜饅頭・饅樂\n3. douce Nucca：草千里外帶赤牛三明治與咖啡。',
+          map: 'https://maps.app.goo.gl/3kqvsjwaWskmBVX47'
+        },
+        {
+          id: '3-6',
+          time: '16:00',
+          title: '[阿蘇] 草千里 (草千里之濱)',
+          type: 'sight',
+          desc: '攝草原全景，沿著開放步道走向池塘拍照，遼闊壯麗。',
+          map: 'https://maps.app.goo.gl/rw3Nb2abo6E4MvJs9'
+        },
+        {
+          id: '3-7',
+          time: '17:30',
+          title: '[交通] 回熊本 (約 60 mins) & Montbell 選品',
+          type: 'traffic',
+          desc: '逛 Montbell 熊本店 (10:00–19:00) 或 Mont Bell Kumamoto Sakuramachi (櫻町店 10:00–20:00)。',
+          map: 'https://maps.app.goo.gl/HSDHmXdF42v9A6u1A'
+        },
+        {
+          id: '3-8',
+          time: '19:30',
+          title: '[居酒屋] [熊本] 大眾馬肉酒場 三村 熊本下通り店',
+          type: 'food',
+          desc: '預約 19:30。居酒屋，馬刺身、網烤馬肉、壽喜燒、馬肉餃子，適合兩人少量單點分享。',
+          map: 'https://maps.app.goo.gl/ysrgTMFRQmmrqGYn7'
+        }
+      ],
+      day4: [
+        {
+          id: '4-1',
+          time: '10:30',
+          title: '[交通] Times 還車',
+          type: 'traffic',
+          desc: '歸還自駕車輛，轉為市區地鐵悠閒逛街步調。',
+          map: 'https://maps.app.goo.gl/AGvVPZZzN1QJ3jv39'
+        },
+        {
+          id: '4-2',
+          time: '11:00',
+          title: '[福岡 中洲] 元祖博多明太重 (めんたい重)',
+          type: 'food',
+          desc: '預約 11:00。營業 07:00–17:00，招牌明太子飯與濃郁沾麵，福岡代表性特色料理。',
+          map: 'https://maps.app.goo.gl/nzWyvX2A4VTch5XFA'
+        },
+        {
+          id: '4-3',
+          time: '12:30',
+          title: "[福岡 天神] I'm donut? 福岡店",
+          type: 'cafe',
+          desc: '爆紅人氣生甜甜圈名店，空氣感極致蓬鬆柔軟，口味多元。',
+          map: 'https://maps.app.goo.gl/D7Zp55FqVGutcE8HA'
+        },
+        {
+          id: '4-4',
+          time: '13:30 - 15:30',
+          title: '[福岡 天神] 天神地下街 & ONE FUKUOKA BLDG.',
+          type: 'shop',
+          desc: '天神地下街 (10:00–20:00) 與全新開幕地標 ONE FUKUOKA BLDG.(ワンビル)。順遊天神市區綠洲「警固公園 (Kego Park)」。',
+          map: 'https://maps.app.goo.gl/uzMDLpFjMxYTxW258'
+        },
+        {
+          id: '4-5',
+          time: '15:30 - 17:00',
+          title: '[福岡 天神] 岩田屋本店 (Iwataya) & 唐吉訶德',
+          type: 'shop',
+          desc: '岩田屋本店頂級選品與伴手禮，以及 Donki 唐吉訶德 (天神西通り店 08:00–05:00 / 福岡天神本店 24HRS)。',
+          map: 'https://maps.app.goo.gl/Xis48bdWJjVnKA1X6'
+        },
+        {
+          id: '4-6',
+          time: '17:00 - 18:30',
+          title: '[天神/大名] 天神西通 + 大名商圈 (Daimyo)',
+          type: 'shop',
+          desc: '福岡最具文青潮流氣息的古著選品街區。逛 mont-bell 福岡天神店 (10:30–21:00，必買福岡限定原創 T-shirt)。',
+          map: 'https://maps.app.goo.gl/Hu1RSQ8nJ9nWQGvU9'
+        },
+        {
+          id: '4-7',
+          time: '18:30 - 20:30',
+          title: '[晚餐名店 二選一] 100Shiki / 博多華味鳥 / 一蘭總本店',
+          type: 'food',
+          desc: '選項 A: 100Shiki 創意居酒屋 (Tabelog百名店, 炭火海鮮)\n選項 B: 水炊料理 博多華味鳥 中洲本店 (預約 20:30, 濃郁雞肉鍋雜炊)\n選項 C: 一蘭豚骨拉麵總本店 (24HR, 20:00 和樂團演出)。',
+          map: 'https://maps.app.goo.gl/Kqs6r8jvuHWQBfYk7'
+        },
+        {
+          id: '4-8',
+          time: '20:30 - 22:30',
+          title: '[夜遊藝術] teamLab 福岡城跡光之祭 & 聖誕市集',
+          type: 'sight',
+          desc: '1. teamLab 福岡城跡光之祭 (18:15–22:00，歷史石牆樹木互動光影)\n2. 博多車站光之街聖誕市集 (熱紅酒與限定馬克杯)\n3. 大濠公園湖畔夜間漫步。',
+          map: 'https://www.teamlab.art/jp/e/fukuoka-castle/'
+        },
+        {
+          id: '4-9',
+          time: '22:30',
+          title: '[住宿] [天神] 東急 Stay 福岡天神',
+          type: 'hotel',
+          desc: '訂單編號：FJK660372。房內備有洗衣機與微波爐，極具便利性。',
+          map: 'https://maps.app.goo.gl/rbaAgcFHCgE4facb6'
+        }
+      ],
+      day5: [
+        {
+          id: '5-1',
+          time: '09:30',
+          title: '[福岡] 福岡麵包超人兒童博物館',
+          type: 'sight',
+          desc: '10:00–17:00，博多超萌拍照熱點與可愛烘焙麵包圈。',
+          map: 'https://maps.app.goo.gl/eREopyB1cREhuoVx8'
+        },
+        {
+          id: '5-2',
+          time: '11:00',
+          title: '[福岡] 櫛田神社 (博多總鎮守)',
+          type: 'sight',
+          desc: '博多守護神社，也是博多祇園山笠祭的重要文化據點，陳列巨型山笠神轎，適合參拜祈福。',
+          map: 'https://maps.app.goo.gl/pA81ZRDGtPeMrK5i7'
+        },
+        {
+          id: '5-3',
+          time: '11:45',
+          title: '[福岡] 川端通商店街 散策',
+          type: 'shop',
+          desc: '09:00–18:00。約 400 公尺長的日式傳統有頂棚商店街，聚集約 110 間新舊店舖，適合探尋在地文化點心。',
+          map: 'https://maps.app.goo.gl/XmcZBG6389ai5rPJA'
+        },
+        {
+          id: '5-4',
+          time: '12:15',
+          title: '[和菓子] 鈴懸 博多本店',
+          type: 'cafe',
+          desc: '博多百年和菓子第一老店！必買「鈴乃最中」、「鈴乃〇餅」，亦可在附設優雅茶鋪享用日式抹茶聖代與餡蜜。',
+          map: 'https://maps.app.goo.gl/825bhVQsaquqySrW9'
+        },
+        {
+          id: '5-5',
+          time: '12:45',
+          title: '[名產伴手] 明月堂 & 中洲善哉 烤麻糬紅豆湯',
+          type: 'food',
+          desc: '1. 明月堂：必買「博多通りもん」，奶香柔嫩甜點送禮首選\n2. 中洲善哉 (11:00–17:00)：招牌烤年糕紅豆熱甜湯。',
+          map: 'https://maps.app.goo.gl/9kUHe5kw1iYXbmbV7'
+        },
+        {
+          id: '5-6',
+          time: '13:00',
+          title: '[壽喜燒] Nishijin Hatsuki Kuten Hakata Store',
+          type: 'food',
+          desc: '預約 13:00。博多車站頂樓美味壽喜燒，頂級和牛涮煮蛋汁，尊享午間盛宴。',
+          map: 'https://maps.app.goo.gl/mavAguJKr4q9mhqG9'
+        },
+        {
+          id: '5-7',
+          time: '15:00 - 17:00',
+          title: '[採買補完] 博多運河城 & Others (未逛完店家)',
+          type: 'shop',
+          desc: '運河城最後血拼、補買藥妝伴手禮，或前往前幾天未逛到的口袋名單店鋪。',
+          map: 'https://maps.app.goo.gl/16YTo164cEGnBe8PA'
+        },
+        {
+          id: '5-8',
+          time: '17:30',
+          title: '[返程] 前往福岡機場 (FUK)',
+          type: 'traffic',
+          desc: '搭乘地鐵抵達福岡機場國際線航廈，辦理登機出境手續。',
+          map: 'https://maps.google.com/?q=FUK+Airport'
+        },
+        {
+          id: '5-9',
+          time: '19:00 - 20:40',
+          title: '[飛機] 長榮航空 BR103',
+          type: 'traffic',
+          desc: '19:00 FUK 福岡機場 ✈️ 20:40 TPE 桃園機場 T2\n滿載回憶與戰利品平安飛抵台灣桃園國際機場。',
+          map: 'https://maps.google.com/?q=Taiwan+Taoyuan+International+Airport'
+        }
+      ]
+    };
+
+    /* ========================================================
+       2. 必買推薦資料庫 (依區域分類)
+       ======================================================== */
+    const MUST_BUY_DATA = [
+      {
+        id: 'mb-1',
+        region: '博多/天神',
+        name: 'The Full Full Hakata 明太法棍',
+        desc: '福岡最銷魂的明太子法國麵包，外層喀滋香脆，內部塗滿奢華奶油明太子。',
+        tag: '美食限定',
+        icon: '🥖'
+      },
+      {
+        id: 'mb-2',
+        region: '博多/天神',
+        name: "I'm donut? 生甜甜圈",
+        desc: '超人氣生甜甜圈！極致鬆軟濕潤的麵糰口感，每天大排長龍的甜點奇蹟。',
+        tag: '排隊名物',
+        icon: '🍩'
+      },
+      {
+        id: 'mb-3',
+        region: '博多/天神',
+        name: '明月堂 博多通りもん (博多通饅頭)',
+        desc: '榮獲世界食品品質評鑑金牌，濃醇奶香融和白豆沙，福岡送禮第一名名產。',
+        tag: '博多經典',
+        icon: '🥮'
+      },
+      {
+        id: 'mb-4',
+        region: '博多/天神',
+        name: '鈴懸 鈴乃最中 & 鈴乃〇餅',
+        desc: '百年和菓子老舖名作，可愛精緻的鈴鐺造形最中，外殼焦香脆口、內餡高雅甜潤。',
+        tag: '和菓子極品',
+        icon: '🔔'
+      },
+      {
+        id: 'mb-5',
+        region: '博多/天神',
+        name: 'mont-bell 福岡限定原創 T-Shirt',
+        desc: '天神店限定販售，繪有福岡代表意象的原創排汗機能棉 T。',
+        tag: '天神限定',
+        icon: '👕'
+      },
+      {
+        id: 'mb-6',
+        region: '太宰府/糸島',
+        name: '太宰府 かさの家 梅枝餅',
+        desc: '太宰府天滿宮參道必吃！外皮微酥軟糯，裡面是熱騰騰細緻香甜的紅豆沙餡。',
+        tag: '現烤現吃',
+        icon: '🌸'
+      },
+      {
+        id: 'mb-7',
+        region: '太宰府/糸島',
+        name: '糸島 Mataichi 花鹽布丁',
+        desc: '製鹽所手工萃取的海鹽與焦糖，淋在香濃布丁上，鹹甜交融令人驚艷。',
+        tag: '海邊私房',
+        icon: '🍮'
+      },
+      {
+        id: 'mb-8',
+        region: '太宰府/糸島',
+        name: '竈門神社 結緣御守',
+        desc: '日本神社界設計美感天花板！精緻的紅線手環御守與櫻花水滴造型吊飾。',
+        tag: '美感御守',
+        icon: '⛩️'
+      },
+      {
+        id: 'mb-9',
+        region: '熊本/阿蘇',
+        name: '熊本いきなり団子 (突然糰子)',
+        desc: '薄Q外皮包覆著鬆軟厚切黃金地瓜與甜紅豆餡，簡單天然的古早味甜食。',
+        tag: '傳統鄉土',
+        icon: '🍠'
+      },
+      {
+        id: 'mb-10',
+        region: '熊本/阿蘇',
+        name: '阿蘇高菜漬 & 饅樂高菜饅頭',
+        desc: '阿蘇火山土壤孕育的獨特芥菜，風味鹹香微辛，配飯包子皆絕品。',
+        tag: '產地直產',
+        icon: '🥬'
+      },
+      {
+        id: 'mb-11',
+        region: '高千穗',
+        name: '菓子工房 Sorairo 起司饅頭',
+        desc: '高千穗在地極具代表性的點心，餅乾般酥脆外皮內藏香濃起司塊。',
+        tag: '神話之里',
+        icon: '🧀'
+      },
+      {
+        id: 'mb-12',
+        region: '高千穗',
+        name: '高千穗釜炒茶 (杜照 十社さん)',
+        desc: '以傳統大釜鐵鍋翻炒的高千穗茶葉，茶湯金黃甘醇帶有獨特焙炒香氣。',
+        tag: '日本茶珍品',
+        icon: '🍵'
+      }
+    ];
+
+    /* ========================================================
+       3. 狀態管理 (State) & 本地儲存 (LocalStorage)
+       ======================================================== */
+    let currentDay = 'day1';
+    let currentFilter = 'all';
+
+    // 行程資料 (更新版本號為 v4 以確保新行程完整載入)
+    let itineraryData = JSON.parse(localStorage.getItem('kyushu_itinerary_v4')) || DEFAULT_ITINERARY;
+
+    // 購物清單 (支援勾選與新增刪除)
+    let shoppingList = JSON.parse(localStorage.getItem('kyushu_shopping_v3')) || [
+      { id: 's-1', name: 'The Full Full 明太子法棍', qty: 2, note: '當天現吃 / 車上享用', done: false },
+      { id: 's-2', name: '糸島海鹽布丁 & 炊鹽', qty: 4, note: '伴手禮與自己吃', done: false },
+      { id: 's-3', name: '竈門神社 結緣御守', qty: 1, note: '粉色或水滴型', done: false },
+      { id: 's-4', name: '鈴懸 鈴乃最中禮盒', qty: 2, note: '百年和菓子 / 送禮', done: false },
+      { id: 's-5', name: '明月堂 博多通りもん', qty: 3, note: '博多通饅頭', done: false },
+      { id: 's-6', name: 'mont-bell 福岡限定原創T', qty: 1, note: '天神店限定版', done: false }
+    ];
+
+    // 初始化 App
+    document.addEventListener('DOMContentLoaded', () => {
+      renderItinerary();
+      renderMustBuy();
+      renderShoppingList();
+      calculateSplit();
+    });
+
+    /* ========================================================
+       4. 頁籤切換與導覽控制
+       ======================================================== */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.remove('text-sage-dark');
+        el.classList.add('text-muted');
+      });
+
+      const activePane = document.getElementById(`tab-${tabId}`);
+      if (activePane) activePane.classList.remove('hidden');
+
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) {
+        activeNav.classList.add('text-sage-dark');
+        activeNav.classList.remove('text-muted');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setDay(dayKey) {
+      currentDay = dayKey;
+      document.querySelectorAll('.day-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-charcoal', 'shadow-sm');
+        btn.classList.add('text-muted');
+      });
+      const activeBtn = document.getElementById(`btn-${dayKey}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'text-charcoal', 'shadow-sm');
+        activeBtn.classList.remove('text-muted');
+      }
+
+      // 更新頂部 Banner
+      const bannerConfig = {
+        day1: {
+          icon: 'ph-airplane-takeoff',
+          title: '啟程台北・抵達福岡',
+          sub: '入住 Prince Smart Inn、肉一燒肉、中洲屋台',
+          map: 'https://maps.google.com/?q=Hakata+Station'
+        },
+        day2: {
+          icon: 'ph-car',
+          title: '太宰府文化・糸島海景自駕',
+          sub: '天滿宮梅枝餅、竈門神社、夫婦岩、今宿海景晚餐',
+          map: 'https://maps.google.com/?q=Itoshima'
+        },
+        day3: {
+          icon: 'ph-mountain',
+          title: '秘境高千穗峽・阿蘇草千里',
+          sub: '高千穗划船、赤牛料理、草千里夕陽、熊本馬肉居酒屋',
+          map: 'https://maps.google.com/?q=Takachiho+Gorge'
+        },
+        day4: {
+          icon: 'ph-sparkle',
+          title: '天神大名商圈・teamLab 光之祭',
+          sub: '明太重、I\'m donut?、大名選品、水炊雞鍋與光之祭',
+          map: 'https://maps.google.com/?q=Tenjin+Chikagai'
+        },
+        day5: {
+          icon: 'ph-gift',
+          title: '櫛田神社參拜・和菓子老店與返台',
+          sub: '川端通、鈴懸博多本店、明月堂、壽喜燒、返台班機',
+          map: 'https://maps.google.com/?q=Kushida+Shrine'
+        }
+      };
+
+      const cfg = bannerConfig[dayKey];
+      document.getElementById('banner-icon').className = `ph ${cfg.icon} text-base`;
+      document.getElementById('banner-title').innerText = cfg.title;
+      document.getElementById('banner-sub').innerText = cfg.sub;
+      document.getElementById('banner-map-link').href = cfg.map;
+
+      renderItinerary();
+    }
+
+    /* ========================================================
+       5. 行程 (Itinerary) 渲染與編輯邏輯
+       ======================================================== */
+    function getTypeBadge(type) {
+      switch (type) {
+        case 'traffic':
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-200">交通/租車</span>';
+        case 'food':
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-orange-50 text-orange-700 border border-orange-200">道地美食</span>';
+        case 'cafe':
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-50 text-amber-800 border border-amber-200">咖啡甜點</span>';
+        case 'hotel':
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-200">精選住宿</span>';
+        case 'shop':
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-rose-50 text-rose-700 border border-rose-200">購物商場</span>';
+        case 'sight':
+        default:
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-sage-light text-sage-dark border border-sage/30">散策景點</span>';
+      }
+    }
+
+    function renderItinerary() {
+      const container = document.getElementById('itinerary-list');
+      const items = itineraryData[currentDay] || [];
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-muted">
+            <i class="ph ph-map-pin text-3xl opacity-40 mb-2"></i>
+            <p class="text-xs">本日尚無行程安排，點擊下方即可新增。</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map((item, index) => `
+        <div class="relative pl-6 pb-2 before:content-[''] before:absolute before:left-2 before:top-3 before:bottom-0 before:w-[1px] before:bg-sand last:before:hidden group">
+          <!-- 時間圓點標記 -->
+          <div class="absolute left-0 top-2.5 w-4 h-4 rounded-full bg-white border-2 border-sage flex items-center justify-center shadow-xs">
+            <div class="w-1.5 h-1.5 rounded-full bg-sage"></div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-4 border border-sand shadow-warm hover:shadow-float transition duration-200 space-y-2">
+            
+            <!-- 頂部時間與標籤 -->
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 font-mono font-medium text-muted">
+                <i class="ph ph-clock text-sage-dark"></i>
+                <span>${item.time}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                ${getTypeBadge(item.type)}
+                <button onclick="openEditModal('${item.id}')" title="編輯此行程" class="w-7 h-7 rounded-full bg-oatmeal hover:bg-sand text-muted flex items-center justify-center transition">
+                  <i class="ph ph-pencil-simple text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- 地點主標題 -->
+            <h3 class="text-sm font-bold text-charcoal leading-snug tracking-tight">
+              ${item.title}
+            </h3>
+
+            <!-- 描述 / 備註資訊 -->
+            ${item.desc ? `
+              <p class="text-xs text-muted whitespace-pre-line leading-relaxed bg-oatmeal/60 p-2.5 rounded-xl border border-sand/50">
+                ${item.desc}
+              </p>
+            ` : ''}
+
+            <!-- Google 地圖連結按鈕 -->
+            ${item.map ? `
+              <div class="pt-1 flex items-center justify-end">
+                <a href="${item.map}" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-1 text-[11px] font-medium text-sage-dark bg-sage-light/70 hover:bg-sage-light px-3 py-1.5 rounded-xl border border-sage/20 transition active:scale-95">
+                  <i class="ph ph-navigation-arrow text-xs"></i> 開啟 Google Maps 導航
+                </a>
+              </div>
+            ` : ''}
+
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal 控制
+    function openEditModal(itemId) {
+      const modal = document.getElementById('edit-modal');
+      const deleteBtn = document.getElementById('btn-delete-item');
+      document.getElementById('edit-item-day').value = currentDay;
+
+      if (itemId) {
+        // 編輯模式
+        const item = (itineraryData[currentDay] || []).find(i => i.id === itemId);
+        if (!item) return;
+        document.getElementById('modal-heading').innerText = '編輯行程內容';
+        document.getElementById('edit-item-id').value = item.id;
+        document.getElementById('modal-time').value = item.time || '';
+        document.getElementById('modal-title').value = item.title || '';
+        document.getElementById('modal-type').value = item.type || 'sight';
+        document.getElementById('modal-desc').value = item.desc || '';
+        document.getElementById('modal-map').value = item.map || '';
+        deleteBtn.classList.remove('hidden');
+      } else {
+        // 新增模式
+        document.getElementById('modal-heading').innerText = '新增行程景點';
+        document.getElementById('edit-item-id').value = '';
+        document.getElementById('modal-time').value = '10:00';
+        document.getElementById('modal-title').value = '';
+        document.getElementById('modal-type').value = 'sight';
+        document.getElementById('modal-desc').value = '';
+        document.getElementById('modal-map').value = '';
+        deleteBtn.classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeEditModal() {
+      const modal = document.getElementById('edit-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveItemChanges() {
+      const id = document.getElementById('edit-item-id').value;
+      const day = document.getElementById('edit-item-day').value;
+      const time = document.getElementById('modal-time').value.trim() || '任意時間';
+      const title = document.getElementById('modal-title').value.trim();
+      const type = document.getElementById('modal-type').value;
+      const desc = document.getElementById('modal-desc').value.trim();
+      const map = document.getElementById('modal-map').value.trim();
+
+      if (!title) {
+        showToast('請輸入行程或地點名稱！');
+        return;
+      }
+
+      if (!itineraryData[day]) itineraryData[day] = [];
+
+      if (id) {
+        // 更新現有項目
+        const idx = itineraryData[day].findIndex(i => i.id === id);
+        if (idx !== -1) {
+          itineraryData[day][idx] = { id, time, title, type, desc, map };
+        }
+      } else {
+        // 新增項目
+        const newItem = {
+          id: 'custom-' + Date.now(),
+          time,
+          title,
+          type,
+          desc,
+          map: map || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(title)}`
+        };
+        itineraryData[day].push(newItem);
+      }
+
+      localStorage.setItem('kyushu_itinerary_v4', JSON.stringify(itineraryData));
+      closeEditModal();
+      renderItinerary();
+      showToast('行程已成功更新儲存！');
+    }
+
+    function deleteCurrentItem() {
+      const id = document.getElementById('edit-item-id').value;
+      const day = document.getElementById('edit-item-day').value;
+      if (!id || !day) return;
+
+      itineraryData[day] = itineraryData[day].filter(i => i.id !== id);
+      localStorage.setItem('kyushu_itinerary_v4', JSON.stringify(itineraryData));
+      closeEditModal();
+      renderItinerary();
+      showToast('已刪除該行程項目');
+    }
+
+    /* ========================================================
+       6. 必買推薦 (Must Buy) 渲染與一鍵加清單
+       ======================================================== */
+    function renderMustBuy() {
+      const container = document.getElementById('mustbuy-container');
+      const filtered = currentFilter === 'all' 
+        ? MUST_BUY_DATA 
+        : MUST_BUY_DATA.filter(item => item.region.includes(currentFilter));
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-white p-4 rounded-3xl border border-sand shadow-warm flex items-start justify-between gap-3 hover:border-sage/40 transition">
+          <div class="flex items-start gap-3 flex-1">
+            <div class="w-12 h-12 rounded-2xl bg-oatmeal border border-sand flex items-center justify-center text-2xl flex-shrink-0 shadow-inner">
+              ${item.icon}
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-semibold text-sage-dark bg-sage-light px-2 py-0.5 rounded-full">${item.region}</span>
+                <span class="text-[10px] text-muted bg-sand/70 px-2 py-0.5 rounded-full">${item.tag}</span>
+              </div>
+              <h4 class="text-xs font-bold text-charcoal">${item.name}</h4>
+              <p class="text-[11px] text-muted leading-relaxed">${item.desc}</p>
+            </div>
+          </div>
+
+          <button onclick="addMustBuyToShopping('${item.name}', '${item.region}')" title="加入購物清單" 
+            class="w-8 h-8 rounded-full bg-sand/60 hover:bg-sage hover:text-white text-charcoal flex items-center justify-center flex-shrink-0 active:scale-95 transition shadow-xs">
+            <i class="ph ph-plus text-xs"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function filterMustBuy(region) {
+      currentFilter = region;
+      document.querySelectorAll('.mustbuy-filter').forEach(btn => {
+        btn.classList.remove('bg-charcoal', 'text-white');
+        btn.classList.add('bg-white', 'text-muted', 'border', 'border-sand');
+      });
+      event.target.classList.add('bg-charcoal', 'text-white');
+      event.target.classList.remove('bg-white', 'text-muted');
+      renderMustBuy();
+    }
+
+    function addMustBuyToShopping(name, region) {
+      const exists = shoppingList.some(i => i.name === name);
+      if (exists) {
+        showToast(`「${name}」已在清單中囉！`);
+        return;
+      }
+      shoppingList.push({
+        id: 'shop-' + Date.now(),
+        name,
+        qty: 1,
+        note: `推薦必買（${region}）`,
+        done: false
+      });
+      saveShoppingList();
+      showToast(`已將「${name}」加入購物清單！`);
+    }
+
+    /* ========================================================
+       7. 購物清單 (Shopping Checklist) 邏輯
+       ======================================================== */
+    function renderShoppingList() {
+      const container = document.getElementById('shopping-list');
+      const total = shoppingList.length;
+      const done = shoppingList.filter(i => i.done).length;
+      const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+
+      document.getElementById('stat-count').innerText = `${done} / ${total}`;
+      document.getElementById('shopping-progress').style.width = `${pct}%`;
+
+      // 提示紅點
+      const badge = document.getElementById('badge-shopping');
+      if (total > done) {
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      if (total === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 text-muted">
+            <i class="ph ph-shopping-bag text-3xl opacity-30 mb-2"></i>
+            <p class="text-xs">目前沒有代購或購物項目<br>從必買分頁新增或上方自行加入！</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = shoppingList.map(item => `
+        <div class="bg-white p-3.5 rounded-2xl border border-sand shadow-xs flex items-center justify-between gap-3 transition ${item.done ? 'opacity-50 bg-oatmeal/60' : ''}">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <!-- 勾選按鈕 -->
+            <button onclick="toggleShoppingItem('${item.id}')" class="w-6 h-6 rounded-full border ${item.done ? 'bg-sage border-sage text-white' : 'border-clay bg-oatmeal'} flex items-center justify-center flex-shrink-0 transition active:scale-90">
+              ${item.done ? '<i class="ph-bold ph-check text-xs"></i>' : ''}
+            </button>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-charcoal truncate ${item.done ? 'line-through text-muted' : ''}">${item.name}</span>
+                <span class="text-[10px] font-mono text-muted bg-sand/60 px-2 py-0.2 rounded-md font-medium">x${item.qty}</span>
+              </div>
+              ${item.note ? `<p class="text-[11px] text-muted truncate mt-0.5">${item.note}</p>` : ''}
+            </div>
+          </div>
+
+          <button onclick="deleteShoppingItem('${item.id}')" class="text-clay hover:text-rose-500 p-1 transition flex-shrink-0">
+            <i class="ph ph-trash text-sm"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function handleAddItem(e) {
+      e.preventDefault();
+      const name = document.getElementById('shop-input-name').value.trim();
+      const qty = parseInt(document.getElementById('shop-input-qty').value) || 1;
+      const note = document.getElementById('shop-input-note').value.trim();
+
+      if (!name) return;
+
+      shoppingList.unshift({
+        id: 'shop-' + Date.now(),
+        name,
+        qty,
+        note,
+        done: false
+      });
+
+      document.getElementById('shop-input-name').value = '';
+      document.getElementById('shop-input-qty').value = '1';
+      document.getElementById('shop-input-note').value = '';
+
+      saveShoppingList();
+      showToast('已新增品項至清單');
+    }
+
+    function toggleShoppingItem(id) {
+      const item = shoppingList.find(i => i.id === id);
+      if (item) {
+        item.done = !item.done;
+        saveShoppingList();
+      }
+    }
+
+    function deleteShoppingItem(id) {
+      shoppingList = shoppingList.filter(i => i.id !== id);
+      saveShoppingList();
+    }
+
+    function saveShoppingList() {
+      localStorage.setItem('kyushu_shopping_v2', JSON.stringify(shoppingList));
+      renderShoppingList();
+    }
+
+    /* ========================================================
+       8. 工具箱功能 (匯率換算 / AA分帳 / 複製文字)
+       ======================================================== */
+    function convertCurrency(from) {
+      const rateInput = document.getElementById('exchange-rate-input');
+      const rate = parseFloat(rateInput.value) || 0.21;
+      const jpyEl = document.getElementById('calc-jpy');
+      const twdEl = document.getElementById('calc-twd');
+
+      if (from === 'jpy') {
+        const jpy = parseFloat(jpyEl.value) || 0;
+        twdEl.value = jpy > 0 ? Math.round(jpy * rate) : '';
+      } else {
+        const twd = parseFloat(twdEl.value) || 0;
+        jpyEl.value = twd > 0 ? Math.round(twd / rate) : '';
+      }
+    }
+
+    function quickJpy(val) {
+      const jpyEl = document.getElementById('calc-jpy');
+      jpyEl.value = val;
+      convertCurrency('jpy');
+    }
+
+    function calculateSplit() {
+      const total = parseFloat(document.getElementById('split-total').value) || 0;
+      const people = parseInt(document.getElementById('split-people').value) || 1;
+      const rate = parseFloat(document.getElementById('exchange-rate-input').value) || 0.21;
+
+      if (total <= 0 || people <= 0) {
+        document.getElementById('split-result-jpy').innerText = '0';
+        document.getElementById('split-result-twd').innerText = '0';
+        return;
+      }
+
+      const perPersonJpy = Math.ceil(total / people);
+      const perPersonTwd = Math.round(perPersonJpy * rate);
+
+      document.getElementById('split-result-jpy').innerText = perPersonJpy.toLocaleString();
+      document.getElementById('split-result-twd').innerText = perPersonTwd.toLocaleString();
+    }
+
+    function copySplitResult() {
+      const jpy = document.getElementById('split-result-jpy').innerText;
+      const twd = document.getElementById('split-result-twd').innerText;
+      const text = `九州旅行AA分帳提醒：每人應付 ¥${jpy} (約 NT$${twd})`;
+      copyText(text);
+    }
+
+    function copyText(txt) {
+      const temp = document.createElement('textarea');
+      temp.value = txt;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+
+      const toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2000);
+      }
+      showToast('已複製到剪貼簿！');
+    }
+
+    // 輕量 Toast 提示框
+    function showToast(msg) {
+      const existing = document.getElementById('app-toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'app-toast';
+      toast.className = 'fixed top-20 left-1/2 -translate-x-1/2 bg-charcoal/90 text-white text-xs px-4 py-2 rounded-full shadow-float z-50 transition-all duration-300 font-medium tracking-wide';
+      toast.innerText = msg;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
